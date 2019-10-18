@@ -1,26 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
-import qs from 'qs';
-import axios from 'axios';
 
 import { usePushHistory } from 'libs/hooks';
+import { store } from '../../store';
+import axios from 'axios';
+import { isSameDay, differenceInMonths } from 'date-fns';
 
 const ProcessPage = () => {
-    const location = useLocation();
     const onClickCancel = usePushHistory('/');
-    const { code } = qs.parse(location.search, { ignoreQueryPrefix: true });
+    const [medias, setMedias] = useState([]);
 
-    // https://api.instagram.com/oauth/access_token \ -F app_id={app-id} \ -F app_secret={app-secret} \ -F grant_type=authorization_code \ -F redirect_uri={redirect-uri} \ -F code={code}
-    axios.post(
-        'https://api.instagram.com/oauth/access_token',
-        {
-            app_id: '959521137715086'
+    useEffect(
+        () => {
+            async function assignMediasFromApiData(apiData, results, initMediaDate, lastMediaDate = null) {
+                const rawMedias = apiData.data;
+
+                rawMedias.forEach((rawMedia) => {
+                    const currentMediaDate = new Date(rawMedia.timestamp);
+                    if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
+                        return;
+                    }
+                    lastMediaDate = currentMediaDate;
+
+                    const hashTags = rawMedia.caption.match(/\B#\S\S+/gm) || [];
+                    results.push({
+                        ...rawMedia,
+                        hash_tags: hashTags,
+                    });
+                });
+
+                if (!apiData.paging.next || differenceInMonths(initMediaDate, lastMediaDate) >= 3) {
+                    return;
+                }
+
+                const { data } = await axios.get(apiData.paging.next);
+                await assignMediasFromApiData(lastMediaDate, data, results);
+            }
+
+            async function run() {
+                try {
+                    const results = [];
+
+                    const { data } = await axios.get(
+                        'https://graph.instagram.com/me/media',
+                        {
+                            params: {
+                                fields: 'id,caption,media_url,timestamp',
+                                access_token: store.ig.accessToken,
+                            },
+                        },
+                    );
+
+                    await assignMediasFromApiData(data, results, new Date(data.data[0].timestamp));
+                    setMedias(results);
+                    console.log(results);
+                } catch (err) {
+                    console.error(err);
+                    onClickCancel();
+                }
+            }
+
+            run();
         },
-    )
+        [onClickCancel],
+    );
 
     return (
         <div>
+            {/* {medias.length} */}
             <Nav.Link onClick={onClickCancel}>
                 Cancel
             </Nav.Link>

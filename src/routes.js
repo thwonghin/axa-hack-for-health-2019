@@ -7,7 +7,7 @@ import { AnimatedSwitch, spring } from 'react-router-transition';
 import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
-import KitchenPage from './pages/KitchenPage';
+import IgRedirectPage from './pages/IgRedirectPage';
 
 function mapStyles(styles) {
     return {
@@ -37,9 +37,9 @@ const Routes = () => {
                 <ProcessPage />
             </Route>
             <Route
-                path="/kitchen"
+                path="/ig-redirect"
             >
-                <KitchenPage />
+                <IgRedirectPage />
             </Route>
             <Route
                 path="/"
