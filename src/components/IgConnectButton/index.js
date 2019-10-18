@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
+import style from './index.module.scss';
+
 /**
  * IgConnectButton
  * @param {{ redirectUri: string }} props
@@ -21,6 +23,7 @@ export default function IgConnectButton() {
         <Button
             href={connectUrl}
             variant="outline-info"
+            className={style.igConnectButton}
         >
             Connect to Instagram
         </Button>
