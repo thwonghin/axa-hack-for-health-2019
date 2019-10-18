@@ -5,16 +5,16 @@ import { Button } from 'react-bootstrap';
  * IgConnectButton
  * @param {{ redirectUri: string }} props
  */
-export default function IgConnectButton(props) {
+export default function IgConnectButton() {
     const connectUrl = useMemo(
         () => {
             return 'https://api.instagram.com/oauth/authorize'
             + '?app_id=959521137715086'
-            + `&redirect_uri=${props.redirectUri}`
+            + `&redirect_uri=${window.location.origin}/process`
             + '&scope=user_profile'
             + '&response_type=code';
         },
-        [props.redirectUri],
+        [],
     );
 
     return (
