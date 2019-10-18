@@ -7,6 +7,7 @@ import { AnimatedSwitch, spring } from 'react-router-transition';
 import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
+import KitchenPage from './pages/KitchenPage';
 
 function mapStyles(styles) {
     return {
@@ -34,6 +35,11 @@ const Routes = () => {
                 path="/process"
             >
                 <ProcessPage />
+            </Route>
+            <Route
+                path="/kitchen"
+            >
+                <KitchenPage />
             </Route>
             <Route
                 path="/"
