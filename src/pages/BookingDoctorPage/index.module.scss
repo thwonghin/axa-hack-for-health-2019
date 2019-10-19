@@ -1,0 +1,106 @@
+.bookingPage {
+
+}
+
+.doctorCardContainer {
+    padding: 16px;
+}
+
+.doctorCard {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-weight: bold;
+        font-size: 22px;
+    }
+}
+
+.doctorIcon {
+    margin-right: 14px;
+}
+
+.mtrText {
+    color: #9b9b9b;
+}
+
+.timeSlot {
+
+}
+
+.timeSlotDateSelector {
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.timeSlotDateItem {
+    display: inline-block;
+    text-align: center;
+    padding: 7px 30px;
+    font-size: 12px;
+    letter-spacing: 0.43px;
+
+    & > div:nth-child(2) {
+        font-weight: bold;
+    }
+}
+
+.timeSlotDateItemActive {
+    background-color: rgba(74, 144, 226, 0.03);
+    border-bottom: #4a90e2 3px solid;
+}
+
+.timeSlotBody {
+    padding: 20px;
+}
+
+.timeSlotTimeSelector {
+    margin: 0 -6px 0 0;
+}
+
+.timeSlotTimeItem {
+    padding: 0 6px 6px 0;
+
+    > input {
+        width: 0;
+    }
+
+    > input:checked + label {
+        color: white;
+        background-color: #002395;
+    }
+}
+
+.timeSlotTimeItemContent {
+    font-size: 13px;
+    padding: 17px 8px;
+    border-radius: 5px;
+    border: solid 1px #d8d8d8;
+    background-color: #f9f9f9;
+    line-height: 1;
+    text-align: center;
+    color: #65676a;
+    font-weight: bold;
+}
+
+.bookNowButtonContainer {
+    padding: 0 20px;
+}
+
+.bookNowButton {
+    width: 100%;
+    background-color: #f07662;
+    color: white;
+    padding: 18px;
+    border: 0;
+    font-weight: bold;
+
+    &:hover,
+    &:active,
+    &:focus {
+        border: 0;
+        background-color: darken(#f07662, 10%) !important;
+    }
+}
