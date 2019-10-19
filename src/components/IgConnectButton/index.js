@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
+import instagram from '../../assets/images/instagram.svg';
+
 import style from './index.module.scss';
 
 /**
@@ -22,10 +24,15 @@ export default function IgConnectButton() {
     return (
         <Button
             href={connectUrl}
-            variant="outline-info"
+            variant="light"
             className={style.igConnectButton}
         >
-            Connect to Instagram
+            <img
+                src={instagram}
+                width={34}
+                height={34}
+                alt="Instagram"
+            />
         </Button>
     )
 }
