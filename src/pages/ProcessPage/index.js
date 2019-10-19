@@ -2,11 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
 import { isSameDay, differenceInMonths } from 'date-fns';
+import Sentiment from 'sentiment';
+import ColorThief from 'colorthief'
 
 import loading from 'assets/loading.svg';
 import { usePushHistory } from 'libs/hooks';
 import { store } from '../../store';
 import style from './index.module.scss';
+
+function getBase64(url) {
+    return axios
+      .get(
+        url,
+        { responseType: 'arraybuffer' },
+      )
+      .then(response => {
+        const base64 = btoa(
+          new Uint8Array(response.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            '',
+          ),
+        );
+        return "data:;base64," + base64;
+      });
+  }
 
 const ProcessPage = () => {
     const onClickCancel = usePushHistory('/');
@@ -14,27 +33,28 @@ const ProcessPage = () => {
 
     useEffect(
         () => {
+
             async function assignMediasFromApiData(apiData, results, initMediaDate, lastMediaDate = null) {
                 const rawMedias = apiData.data;
-
+        
                 rawMedias.forEach((rawMedia) => {
                     const currentMediaDate = new Date(rawMedia.timestamp);
                     if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
                         return;
                     }
                     lastMediaDate = currentMediaDate;
-
+        
                     const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,
                         hash_tags: hashTags,
                     });
                 });
-
+        
                 if (!apiData.paging.next || differenceInMonths(initMediaDate, lastMediaDate) >= 3) {
                     return;
                 }
-
+        
                 const { data } = await axios.get(apiData.paging.next);
                 await assignMediasFromApiData(lastMediaDate, data, results);
             }
@@ -42,7 +62,7 @@ const ProcessPage = () => {
             async function run() {
                 try {
                     const results = [];
-
+        
                     const { data } = await axios.get(
                         'https://graph.instagram.com/me/media',
                         {
@@ -52,15 +72,56 @@ const ProcessPage = () => {
                             },
                         },
                     );
-
+        
                     await assignMediasFromApiData(data, results, new Date(data.data[0].timestamp));
                     setMedias(results);
-                    console.log(results);
+                    await analyze(results);
                 } catch (err) {
                     console.error(err);
                     onClickCancel();
                 }
             }
+
+            async function analyze(results) {
+                console.log('------ analyze ------');
+
+                console.dir(results);
+                const sentiment = new Sentiment();
+                const colorThief = new ColorThief();
+                const score = await getImageSentiment(results[0].media_url, colorThief);
+                const colorScores = await Promise.all(results.map(r => getImageSentiment(r.media_url, colorThief)));
+                console.log('----- after calculate score -----')
+                console.log(colorScores);
+                
+                // const captionSentiments = results.map(r => sentiment.analyze(r.caption));
+                // const totalCaptionSentiment = captionSentiments.reduce((acc, curr) => {
+                //     return acc + curr.score;
+                // }, 0);
+                // console.log(`captionSentiment: ${totalCaptionSentiment}`);
+            }
+
+            async function getImageSentiment(url, colorThief) {
+                let isResolved = false;
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.addEventListener('load', function() {
+                        const palette = colorThief.getPalette(img);
+                        const colorScore = palette.reduce((acc, curr) => acc + (curr[0] > curr[2] ? 1: -1), 0);
+                        console.log(colorScore);
+                        isResolved = true
+                        resolve(colorScore);
+                    });
+                    setTimeout(() => {
+                        if (!isResolved) {
+                            console.log('rejected');
+                            resolve(0);
+                        }
+                    }, 2000)
+                    img.crossOrigin = 'Anonymous';
+                    img.src = url;
+                })
+            }
+
 
             run();
         },
