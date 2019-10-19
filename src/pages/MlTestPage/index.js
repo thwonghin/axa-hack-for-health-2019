@@ -6,7 +6,6 @@ import { Nav } from 'react-bootstrap';
 
 
 import { usePushHistory } from 'libs/hooks';
-import logo from 'logo.svg';
 import style from './index.module.scss';
 
 const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
@@ -43,7 +42,6 @@ const MlTest = () => {
         <div className={style.app}>
             <header className={style.appHeader}>
                 <img id="img" alt='hi' crossOrigin="anonymous" src="https://cdn2.coachmag.co.uk/sites/coachmag/files/styles/16x9_480/public/2018/07/alex-crockford-home-abs-workout.jpg?itok=f3llAGeq&timestamp=1532953952" width='150' height='150'/>
-                <img src={logo} className={style.appLogo} alt="logo" />
                 <Nav.Link onClick={onClickBook}>
 
                 </Nav.Link>
