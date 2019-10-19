@@ -11,7 +11,6 @@ import IgRedirectPage from './pages/IgRedirectPage';
 
 function mapStyles(styles) {
     return {
-        position: styles.transitionIndex <= 1 ? 'relative' : 'absolute',
         transform: `translateX(${styles.offset}%)`,
         height: 'calc(100vh - 68px)',
     };
@@ -27,9 +26,9 @@ function slide(val) {
 const Routes = () => {
     return (
         <AnimatedSwitch
-            atEnter={{ offset: 100, transitionIndex: 0, }}
-            atLeave={{ offset: slide(-100), transitionIndex: 1, }}
-            atActive={{ offset: slide(0), transitionIndex: 2, }}
+            atEnter={{ offset: 100 }}
+            atLeave={{ offset: slide(-100) }}
+            atActive={{ offset: slide(0) }}
             className={style.switchWrapper}
             mapStyles={mapStyles}
         >
