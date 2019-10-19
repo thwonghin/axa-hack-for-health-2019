@@ -16,7 +16,7 @@ export default function BookingDoctorPage () {
     const handleClickBookNow = useCallback(
         () => {
             setLoading(true);
-            setTimeout(() => onClickBookNow(), 2000);
+            setTimeout(() => onClickBookNow(), 1000);
         },
         [onClickBookNow],
     )
