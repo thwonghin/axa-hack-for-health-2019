@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
-import { isSameDay, differenceInMonths } from 'date-fns';
 import Sentiment from 'sentiment';
 import ColorThief from 'colorthief'
+import { isSameDay, differenceInMonths, parseISO } from 'date-fns';
 
 import loading from 'assets/loading.svg';
 import { usePushHistory } from 'libs/hooks';
@@ -38,7 +38,7 @@ const ProcessPage = () => {
                 const rawMedias = apiData.data;
         
                 rawMedias.forEach((rawMedia) => {
-                    const currentMediaDate = new Date(rawMedia.timestamp);
+                    const currentMediaDate = parseISO(rawMedia.timestamp);
                     if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
                         return;
                     }
@@ -56,7 +56,7 @@ const ProcessPage = () => {
                 }
         
                 const { data } = await axios.get(apiData.paging.next);
-                await assignMediasFromApiData(lastMediaDate, data, results);
+                await assignMediasFromApiData(data, results, initMediaDate, lastMediaDate);
             }
 
             async function run() {
@@ -73,7 +73,7 @@ const ProcessPage = () => {
                         },
                     );
         
-                    await assignMediasFromApiData(data, results, new Date(data.data[0].timestamp));
+                    await assignMediasFromApiData(data, results, parseISO(data.data[0].timestamp));
                     setMedias(results);
                     const result = await analyze(results);
                     console.dir(result);
