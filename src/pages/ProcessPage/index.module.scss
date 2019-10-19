@@ -50,6 +50,7 @@
         .imagePlaceholder {
             width: 230px;
             height: 126px;
+            object-fit: cover;
             background-color: white;
             margin: auto;
             margin-top: 40px;
@@ -58,7 +59,7 @@
         .text {
             letter-spacing: 0.65px;
             margin-top: 38px;
-            margin-bottom: 85px;
+            margin-bottom: 50px;
             color: white;
             padding-left: 20px;
             padding-right: 20px;

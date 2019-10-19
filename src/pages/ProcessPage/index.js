@@ -76,10 +76,10 @@ const ProcessPage = () => {
                 <img src={loading} alt="loading" />
             </div>
             <div className={style.tip}>
-                <div className={style.imagePlaceholder}></div>
+                <img src="https://axahk.cdn.axa-contento-118412.eu/axahk/2c8e56395bb750eaf79253df10e44d77e477e4a9_asian-woman-taking-photo_resize.jpg" className={style.imagePlaceholder} alt="travel" />
                 <div className={style.text}>
-                    <h2 className={style.title}>Health Tip #1039</h2>
-                    <p className={style.desc}>Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet, vivëndùm àdversarium</p>
+                    <h2 className={style.title}>Set a time limit for work on a trip</h2>
+                    <p className={style.desc}>The purpose of travelling is to do something different from our daily routine. For better de-stress results, remember to be fully committed to your trip and try not to bring your work along.</p>
                 </div>
             </div>
         </div>
