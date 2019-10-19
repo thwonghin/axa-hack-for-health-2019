@@ -13,26 +13,29 @@ import IgConnectButton from '../../components/IgConnectButton';
 const Home = () => {
     return (
         <div className={style.home}>
-            <img
-                className={style.homeBg}
-                src={homeBg}
-                width={191}
-                height={275}
-                alt="Home BG"
-            />
             <div className={style.content}>
-                <h1 className={style.heading}>Understand<br/>Your<br/>Mental Health<br/>with just<br/>one click.</h1>
-                <p className={style.description}>Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet.</p>
-                <div
-                    className={style.cta}
-                >
-                    <Button className={`${style.ctaButton} mr-3`} variant="light">
-                        <img src={facebook} width={34} height={34} alt="Facebook"/>
-                    </Button>
-                    <IgConnectButton />
-                    <Button className={`${style.ctaButton} ml-3`} variant="light">
-                        <img src={twitter} width={34} height={34} alt="Twitter"/>
-                    </Button>
+                <div className={style.bgColor} />
+                <img
+                    className={style.homeBg}
+                    src={homeBg}
+                    width={191}
+                    height={275}
+                    alt="Home BG"
+                />
+                <div className="position-relative">
+                    <h1 className={style.heading}>Understand<br/>Your<br/>Mental Health<br/>with just<br/>one click.</h1>
+                    <p className={style.description}>Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet.</p>
+                    <div
+                        className={style.cta}
+                    >
+                        <Button className={`${style.ctaButton} mr-3`} variant="light">
+                            <img src={facebook} width={34} height={34} alt="Facebook"/>
+                        </Button>
+                        <IgConnectButton />
+                        <Button className={`${style.ctaButton} ml-3`} variant="light">
+                            <img src={twitter} width={34} height={34} alt="Twitter"/>
+                        </Button>
+                    </div>
                 </div>
             </div>
             <div className={style.ctaDescription}>
