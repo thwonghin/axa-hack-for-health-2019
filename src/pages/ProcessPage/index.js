@@ -47,11 +47,13 @@ const ProcessPage = () => {
                         'https://graph.instagram.com/me/media',
                         {
                             params: {
-                                fields: 'id,caption,media_url,timestamp',
+                                fields: 'id,caption,media_url,timestamp,children,children.media_url',
                                 access_token: store.ig.accessToken,
                             },
                         },
                     );
+
+                    console.log(data);
 
                     await assignMediasFromApiData(data, results, parseISO(data.data[0].timestamp));
                     setMedias(results);
