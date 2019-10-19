@@ -1,0 +1,69 @@
+.intro {
+    font-size: 14px;
+    font-weight: bold;
+    color: #9b9b9b;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.header {
+    background-color: rgba(28, 28, 28, 0.5);
+
+    > h1 {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 6px;
+        color: white;
+        text-align: center;
+        padding: 75px 10px;
+    }
+}
+
+.phychoList {
+    padding: 20px 14px;
+}
+
+.phycho {
+    margin-bottom: 16px;
+    border-radius: 10px;
+    box-shadow: 0 -3px 10px 0 rgba(128, 128, 128, 0.15);
+
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4a4a4a;
+        margin-bottom: 0;
+    }
+}
+
+.phychoIntro {
+    color: #9b9b9b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.cta {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 12px 36px;
+    box-shadow: 0 -3px 10px 0 rgba(128, 128, 128, 0.15);
+}
+
+.ctaButton {
+    width: 100%;
+    background-color: #f07662;
+    color: white;
+    padding: 18px;
+    border: 0;
+    font-weight: bold;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:disabled {
+        border: 0;
+        background-color: darken(#f07662, 10%) !important;
+    }
+}
