@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
 import Sentiment from 'sentiment';
@@ -28,8 +29,15 @@ function getBase64(url) {
   }
 
 const ProcessPage = () => {
-    const onClickCancel = usePushHistory('/');
     const [medias, setMedias] = useState([]);
+    const history = useHistory();
+
+    const restart = useCallback(
+        () => {
+            window.location.href = window.location.href.replace(/(.*\/)[^\\/]+$/, '$1');
+        },
+        [],
+    );
 
     useEffect(
         () => {
@@ -38,12 +46,6 @@ const ProcessPage = () => {
                 const rawMedias = apiData.data;
         
                 rawMedias.forEach((rawMedia) => {
-                    const currentMediaDate = parseISO(rawMedia.timestamp);
-                    if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
-                        return;
-                    }
-                    lastMediaDate = currentMediaDate;
-        
                     const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,
@@ -76,9 +78,37 @@ const ProcessPage = () => {
                     await assignMediasFromApiData(data, results, parseISO(data.data[0].timestamp));
                     setMedias(results);
                     const result = await analyze(results);
-                    console.dir(result);
+                    console.log(result);
+                    if (Number.isNaN(result.captionSentimentScore) && Number.isNaN(result.imageSentimentScore)) {
+                        history.push('/reward');
+                        return;
+                    }
+                    if (!Number.isNaN(result.captionSentimentScore) && Number.isNaN(result.imageSentimentScore)) {
+                        if (result.captionSentimentScore < 0) {
+                            history.push(`/phycho?captionSentimentScore=${result.captionSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
+                    if (Number.isNaN(result.captionSentimentScore) && !Number.isNaN(result.imageSentimentScore)) {
+                        if (result.imageSentimentScore < 0) {
+                            history.push(`/phycho?imageSentimentScore=${result.imageSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
+                    if (!Number.isNaN(result.captionSentimentScore) && !Number.isNaN(result.imageSentimentScore)) {
+                        if (result.imageSentimentScore < 0 || result.captionSentimentScore < 0) {
+                            history.push(`/phycho?imageSentimentScore=${result.imageSentimentScore}&captionSentimentScore=${result.captionSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
                 } catch (err) {
-                    onClickCancel();
+                    restart();
                 }
             }
 
@@ -99,13 +129,13 @@ const ProcessPage = () => {
 
                 const totalAbsCaptionSentiment = captionSentiments.reduce((acc, curr) => {
                     return acc + Math.abs(curr.score);
-                }, 0); 
-                
+                }, 0);
+
                 return { imageSentimentScore: totalImageSentiment/totalAbsImageSentiment, captionSentimentScore: totalCaptionSentiment/totalAbsCaptionSentiment};
             }
 
             function getPaletteScore(palette) {
-                return  palette[0] > palette[2] ? 1: -1 // R > B 
+                return  palette[0] > palette[2] ? 1: -1 // R > B
             }
 
             async function getImagePalette(url, colorThief) {
@@ -131,7 +161,7 @@ const ProcessPage = () => {
 
             run();
         },
-        [onClickCancel],
+        [history],
     );
 
     return (

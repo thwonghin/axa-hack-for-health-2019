@@ -9,7 +9,7 @@ export default function BookingConfirmedPage () {
             <div className="text-center">
                 <img src={drinkCoffeeWithLaptopInCafe} alt="Drink coffee with laptop in cafe" width={170} />
                 <h1 className={styles.title}>Booking Confirmed</h1>
-                <div className={styles.message}>Thank you, mud mud mud</div>
+                <div className={styles.message}>Thank you, please arrive on time.</div>
             </div>
         </div>
     )
