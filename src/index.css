@@ -1,6 +1,12 @@
 @font-face {
   font-family: 'Avenir';
-  src: local('Avenir'), url(./fonts/Avenir.ttc) format('truetype');
+  font-weight: bold;
+  src: url(./fonts/Avenir-Demi.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url(./fonts/Avenir-Regular.otf) format('truetype');
 }
 
 body {
