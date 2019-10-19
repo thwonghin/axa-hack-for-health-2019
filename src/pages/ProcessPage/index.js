@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
@@ -29,9 +29,15 @@ function getBase64(url) {
   }
 
 const ProcessPage = () => {
-    const onClickCancel = usePushHistory('/');
     const [medias, setMedias] = useState([]);
     const history = useHistory();
+
+    const restart = useCallback(
+        () => {
+            window.location.href = window.location.href.replace(/(.*\/)[^\\/]+$/, '$1');
+        },
+        [],
+    );
 
     useEffect(
         () => {
@@ -102,7 +108,7 @@ const ProcessPage = () => {
                         return;
                     }
                 } catch (err) {
-                    onClickCancel();
+                    restart();
                 }
             }
 
@@ -155,7 +161,7 @@ const ProcessPage = () => {
 
             run();
         },
-        [onClickCancel],
+        [history],
     );
 
     return (
