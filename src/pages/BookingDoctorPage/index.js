@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Card, Media, Row, Col, Button } from 'react-bootstrap';
 
-import doctorIcon from '../../assets/images/doctor-icon.svg';
+import drPhilChengWongChan from '../../assets/images/dr-phil-cheng-wong-chan.jpg';
 import googleMapIcon from '../../assets/images/google-map.png';
 import googleMapIcon2x from '../../assets/images/google-map@2x.png';
 import googleMapIcon3x from '../../assets/images/google-map@3x.png';
@@ -29,16 +29,16 @@ export default function BookingDoctorPage () {
                         <Media>
                             <img
                                 className={styles.doctorIcon}
-                                src={doctorIcon}
-                                width={84}
-                                height={83}
+                                src={drPhilChengWongChan}
+                                width={85}
+                                height={85}
                                 alt="Doctor"
                             />
                             <Media.Body>
-                                <h2><span style={{ fontWeight: 'normal' }}>Dr.</span> Cody Cheng Wong</h2>
+                                <h2><span style={{ fontWeight: 'normal' }}>Dr.</span> Phil Cheng Wong Chan</h2>
                             </Media.Body>
                         </Media>
-                        <Row noGutters className="mt-3">
+                        <Row noGutters className="mt-2">
                             <Col xs="auto" style={{ paddingRight: '12px' }}>
                                 <img
                                     src={googleMapIcon}
@@ -48,11 +48,11 @@ export default function BookingDoctorPage () {
                                     alt="Google Map"
                                 />
                             </Col>
-                            <Col xs>
+                            <Col xs className={styles.addressText}>
                                 Suite 556, 5/F, Lee Garden Three, 1 Sunning Road
                             </Col>
                         </Row>
-                        <Row noGutters className="mt-3">
+                        <Row noGutters className="mt-2">
                             <Col xs="auto" style={{ paddingRight: '12px' }}>
                                 <img src={mtrIcon} width={17} alt="Google Map" />
                             </Col>
