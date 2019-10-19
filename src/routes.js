@@ -7,6 +7,7 @@ import { AnimatedSwitch, spring } from 'react-router-transition';
 import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
+import MlTestPage from './pages/MlTestPage';
 
 function mapStyles(styles) {
     return {
@@ -36,9 +37,14 @@ const Routes = () => {
                 <ProcessPage />
             </Route>
             <Route
+                path="/ml-test"
+            >
+                <MlTestPage />
+            </Route>
+            <Route
                 path="/"
             >
-                <HomePage />
+                <HomePage/>
             </Route>
         </AnimatedSwitch>
     );
