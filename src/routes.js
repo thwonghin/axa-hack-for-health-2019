@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
 import IgRedirectPage from './pages/IgRedirectPage';
 import BookingDoctorPage from './pages/BookingDoctorPage';
+import BookingConfirmedPage from './pages/BookingConfirmedPage';
 
 function mapStyles(styles) {
     return {
@@ -33,6 +34,11 @@ const Routes = () => {
             className={style.switchWrapper}
             mapStyles={mapStyles}
         >
+            <Route
+                path="/booking-confirmed"
+            >
+                <BookingConfirmedPage />
+            </Route>
             <Route
                 path="/booking"
             >

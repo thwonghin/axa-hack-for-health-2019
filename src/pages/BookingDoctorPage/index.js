@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Card, Media, Row, Col, Button } from 'react-bootstrap';
 
 import doctorIcon from '../../assets/images/doctor-icon.svg';
@@ -7,8 +7,20 @@ import googleMapIcon2x from '../../assets/images/google-map@2x.png';
 import googleMapIcon3x from '../../assets/images/google-map@3x.png';
 import mtrIcon from '../../assets/images/mtr-logo.png';
 import styles from './index.module.scss';
+import { usePushHistory } from 'libs/hooks';
 
 export default function BookingDoctorPage () {
+    const onClickBookNow = usePushHistory('/booking-confirmed');
+    const [isLoading, setLoading] = useState(false);
+
+    const handleClickBookNow = useCallback(
+        () => {
+            setLoading(true);
+            setTimeout(() => onClickBookNow(), 2000);
+        },
+        [onClickBookNow],
+    )
+
     return (
         <div className={styles.bookingPage}>
             <div className={styles.doctorCardContainer}>
@@ -91,7 +103,7 @@ export default function BookingDoctorPage () {
                     </Row>
                 </div>
                 <div className={styles.bookNowButtonContainer}>
-                    <Button className={styles.bookNowButton}>Book Now</Button>
+                    <Button className={styles.bookNowButton} disabled={isLoading} onClick={handleClickBookNow}>{!isLoading ? 'Book Now' : 'Loading...'}</Button>
                 </div>
             </div>
         </div>

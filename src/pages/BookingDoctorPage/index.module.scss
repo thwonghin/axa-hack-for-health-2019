@@ -99,7 +99,8 @@
 
     &:hover,
     &:active,
-    &:focus {
+    &:focus,
+    &:disabled {
         border: 0;
         background-color: darken(#f07662, 10%) !important;
     }
