@@ -7,50 +7,86 @@ import phychoLevel from '../../assets/images/phycho-level.svg';
 
 import styles from './index.module.scss';
 
+import Score from './Score';
+
 const PhychoPage = () => {
     return (
         <div>
             <p className={styles.intro}>Based on our analysis, here are our insights</p>
-            <header className={styles.header}>
-                <h1>Mud Mud</h1>
-            </header>
-            <div className={styles.phychoList}>
-                <Card className={styles.phycho}>
-                    <Card.Body>
-                        <Media>
-                            <Media.Body>
-                                <div className={styles.phychoIntro}>You might have</div>
-                                <h2>Mild Depression</h2>
-                            </Media.Body>
-                            <img
-                                src={mildDepression}phychoLevel
-                                width={39}
-                                height={48}
-                                alt="Mild Depression"
-                            />
-                        </Media>
-                        {/* <div className={styles.phychoLevel}>
-                            <img className={styles.phychoLevelBar} src={phychoLevel} alt="Phycho level" />
-                        </div> */}
-                    </Card.Body>
-                </Card>
-                <Card className={styles.phycho}>
-                    <Card.Body>
-                        <Media>
-                            <Media.Body>
-                                <div className={styles.phychoIntro}>You might have</div>
-                                <h2>Mild Depression</h2>
-                            </Media.Body>
-                            <img
-                                src={severeAnxiety}
-                                width={39}
-                                height={48}
-                                alt="Severe Anxiety"
-                            />
-                        </Media>
-                    </Card.Body>
-                </Card>
+            <div
+                style={{
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 'bold',
+                    fontSize: '24px',
+                    letterSpacing: '6px',
+                    backgroundImage: 'url(https://static.businessinsider.sg/2018/08/08/5b85bf218905f2fb1e8b4a6b.png)',
+                    width: '100%',
+                    height: '175px',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0,35,149, 0.5)'
+                    }}
+                />
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'white',
+                        padding: '40px',
+                        flexDirection: 'column',
+                    }}
+                >
+                    <p style={{
+                        fontWeight: 'bold',
+                        letterSpacing: '2px',
+                        fontSize: '20px',
+                        textAlign: 'center',
+                    }}>
+                        IS EVERYTHING ALRIGHT?
+                    </p>
+                    <p style={{
+                        letterSpacing: '0.3px',
+                        fontSize: '13px',
+                        marginBottom: 0,
+                        textAlign: 'center',
+                    }}>
+                        A positive attitude gives you power over your circumstances instead of your circumstances having power over you.
+                    </p>
+                </div>
             </div>
+            <Card className={styles.phycho}>
+                <Card.Body>
+                    <Media>
+                        <Media.Body>
+                            <h2>Image score</h2>
+                            <div className={styles.phychoIntro}>Results are based on your photos</div>
+                            <Score score={48} />
+                            <br />
+                            <h2>Caption score</h2>
+                            <div className={styles.phychoIntro}>Results are based on your captions</div>
+                            <Score score={48} />
+                        </Media.Body>
+                    </Media>
+                </Card.Body>
+            </Card>
 
             <div className={styles.cta}>
                 <Button className={styles.ctaButton}>CTA talk to chat bot?</Button>
