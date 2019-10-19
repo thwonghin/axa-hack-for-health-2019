@@ -1,6 +1,7 @@
 .navbar {
-    padding: 11px 22px;
+    padding: 20px 23px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+    background-image: linear-gradient(to left, #92adb9 0%, #4d51f2 100%);
 }
 
 .navbarBrand {
@@ -9,4 +10,8 @@
 
 .navbarButton {
     border: 0;
+}
+
+.actionButtons {
+    padding: 0;
 }
