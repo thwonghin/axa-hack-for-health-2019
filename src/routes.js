@@ -8,10 +8,12 @@ import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
 import MlTestPage from './pages/MlTestPage';
+import IgRedirectPage from './pages/IgRedirectPage';
 
 function mapStyles(styles) {
     return {
         transform: `translateX(${styles.offset}%)`,
+        height: 'calc(100vh - 68px)',
     };
 }
 
@@ -40,6 +42,11 @@ const Routes = () => {
                 path="/ml-test"
             >
                 <MlTestPage />
+            </Route>
+            <Route
+                path="/ig-redirect"
+            >
+                <IgRedirectPage />
             </Route>
             <Route
                 path="/"
