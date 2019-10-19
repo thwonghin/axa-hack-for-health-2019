@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import axios from 'axios';
+import Sentiment from 'sentiment';
+import ColorThief from 'colorthief'
 import { isSameDay, differenceInMonths, parseISO } from 'date-fns';
 
 import loading from 'assets/loading.svg';
@@ -8,22 +11,41 @@ import { usePushHistory } from 'libs/hooks';
 import { store } from '../../store';
 import style from './index.module.scss';
 
+function getBase64(url) {
+    return axios
+      .get(
+        url,
+        { responseType: 'arraybuffer' },
+      )
+      .then(response => {
+        const base64 = btoa(
+          new Uint8Array(response.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            '',
+          ),
+        );
+        return "data:;base64," + base64;
+      });
+  }
+
 const ProcessPage = () => {
-    const onClickCancel = usePushHistory('/');
     const [medias, setMedias] = useState([]);
+    const history = useHistory();
+
+    const restart = useCallback(
+        () => {
+            window.location.href = window.location.href.replace(/(.*\/)[^\\/]+$/, '$1');
+        },
+        [],
+    );
 
     useEffect(
         () => {
+
             async function assignMediasFromApiData(apiData, results, initMediaDate, lastMediaDate = null) {
                 const rawMedias = apiData.data;
 
                 rawMedias.forEach((rawMedia) => {
-                    const currentMediaDate = parseISO(rawMedia.timestamp);
-                    if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
-                        return;
-                    }
-                    lastMediaDate = currentMediaDate;
-
                     const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,
@@ -55,16 +77,91 @@ const ProcessPage = () => {
 
                     await assignMediasFromApiData(data, results, parseISO(data.data[0].timestamp));
                     setMedias(results);
-                    console.log(results);
+                    const result = await analyze(results);
+                    console.log(result);
+                    if (Number.isNaN(result.captionSentimentScore) && Number.isNaN(result.imageSentimentScore)) {
+                        history.push('/reward');
+                        return;
+                    }
+                    if (!Number.isNaN(result.captionSentimentScore) && Number.isNaN(result.imageSentimentScore)) {
+                        if (result.captionSentimentScore < 0) {
+                            history.push(`/phycho?captionSentimentScore=${result.captionSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
+                    if (Number.isNaN(result.captionSentimentScore) && !Number.isNaN(result.imageSentimentScore)) {
+                        if (result.imageSentimentScore < 0) {
+                            history.push(`/phycho?imageSentimentScore=${result.imageSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
+                    if (!Number.isNaN(result.captionSentimentScore) && !Number.isNaN(result.imageSentimentScore)) {
+                        if (result.imageSentimentScore < 0 && result.captionSentimentScore < 0) {
+                            history.push(`/phycho?imageSentimentScore=${result.imageSentimentScore}&captionSentimentScore=${result.captionSentimentScore}`);
+                        } else {
+                            history.push('/reward');
+                        }
+                        return;
+                    }
                 } catch (err) {
-                    console.error(err);
-                    onClickCancel();
+                    restart();
                 }
             }
 
+            async function analyze(results) {
+                console.log('------ analyze ------');
+
+                console.dir(results);
+                const sentiment = new Sentiment();
+                const colorThief = new ColorThief();
+                const palettes = await Promise.all(results.map(r => getImagePalette(r.media_url, colorThief)));
+                const totalImageSentiment = palettes.reduce((acc, curr) => acc + getPaletteScore(curr), 0);
+                const totalAbsImageSentiment = palettes.reduce((acc, curr) => acc + Math.abs(getPaletteScore(curr)), 0);
+                const captionSentiments = results.map(r => sentiment.analyze(r.caption));
+                console.dir(captionSentiments);
+                const totalCaptionSentiment = captionSentiments.reduce((acc, curr) => {
+                    return acc + curr.score;
+                }, 0);
+
+                const totalAbsCaptionSentiment = captionSentiments.reduce((acc, curr) => {
+                    return acc + Math.abs(curr.score);
+                }, 0);
+
+                return { imageSentimentScore: totalImageSentiment/totalAbsImageSentiment, captionSentimentScore: totalCaptionSentiment/totalAbsCaptionSentiment};
+            }
+
+            function getPaletteScore(palette) {
+                return  palette[0] > palette[2] ? 1: -1 // R > B
+            }
+
+            async function getImagePalette(url, colorThief) {
+                let isResolved = false;
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.addEventListener('load', function() {
+                        const palette = colorThief.getPalette(img);
+                        isResolved = true
+                        resolve(palette);
+                    });
+                    setTimeout(() => {
+                        if (!isResolved) {
+                            console.log('rejected');
+                            resolve(0);
+                        }
+                    }, 2000)
+                    img.crossOrigin = 'Anonymous';
+                    img.src = url;
+                })
+            }
+
+
             run();
         },
-        [onClickCancel],
+        [history],
     );
 
     return (

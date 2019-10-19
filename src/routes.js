@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Route,
+    Redirect,
 } from 'react-router-dom';
 import { AnimatedSwitch, spring } from 'react-router-transition';
 
@@ -17,7 +18,7 @@ import PhychoPage from './pages/PhychoPage';
 function mapStyles(styles) {
     return {
         transform: `translateX(${styles.offset}%)`,
-        height: 'calc(100vh - 68px)',
+        height: 'calc(100vh - 59px)',
     };
 }
 
