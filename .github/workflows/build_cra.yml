@@ -13,10 +13,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: yarn build
-      run: |
-        yarn
-        yarn build
-        mv build docs
+    # - name: yarn build
+    #   run: |
+    #     yarn
+    #     yarn build
+    #   env:
+    #     CI: false
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
       env:
-        CI: false
+        ACCESS_TOKEN: 7da1f53c6409e8b4096591dd3875edddd83663d5
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: build
+        BUILD_SCRIPT: yarn && yarn build

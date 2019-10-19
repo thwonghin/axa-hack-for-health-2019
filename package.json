@@ -2,6 +2,7 @@
   "name": "axa-hack-for-health-2019",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://thwonghin.github.io/axa-hack-for-health-2019/",
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
