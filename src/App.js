@@ -1,14 +1,14 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import MainNavbar from './components/MainNavbar';
 import Routes from './routes';
 
 const App = () => (
-    <BrowserRouter>
+    <MemoryRouter initialEntries={['/']}>
         <MainNavbar />
         <Routes />
-    </BrowserRouter>
+    </MemoryRouter>
 );
 
 export default App;

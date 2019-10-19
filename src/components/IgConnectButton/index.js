@@ -14,7 +14,7 @@ export default function IgConnectButton() {
         () => {
             return 'https://api.instagram.com/oauth/authorize'
             + `?app_id=${process.env.REACT_APP_IG_APP_ID}`
-            + `&redirect_uri=${window.location.href}ig-redirect`
+            + `&redirect_uri=${window.location.href}`
             + '&scope=user_profile,user_media'
             + '&response_type=code';
         },

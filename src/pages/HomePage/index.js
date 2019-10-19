@@ -10,9 +10,12 @@ import orangeArrow from '../../assets/images/orange-arrow.svg'
 
 import IgConnectButton from '../../components/IgConnectButton';
 
+import IgRedirect from '../../components/IgRedirect';
+
 const Home = () => {
     return (
         <div className={style.home}>
+            <IgRedirect />
             <div className={style.content}>
                 <div className={style.bgColor} />
                 <img
