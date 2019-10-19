@@ -40,12 +40,6 @@ const ProcessPage = () => {
                 const rawMedias = apiData.data;
 
                 rawMedias.forEach((rawMedia) => {
-                    const currentMediaDate = parseISO(rawMedia.timestamp);
-                    if (lastMediaDate !== null && isSameDay(currentMediaDate, lastMediaDate)) {
-                        return;
-                    }
-                    lastMediaDate = currentMediaDate;
-
                     const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,

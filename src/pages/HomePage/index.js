@@ -24,7 +24,7 @@ const Home = () => {
                 />
                 <div className="position-relative">
                     <h1 className={style.heading}>Understand<br/>Your<br/>Mental Health<br/>with just<br/>one click.</h1>
-                    <p className={style.description}>Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet.</p>
+                    <p className={style.description}>Your social profile will only be used for this analysis. We will not share your information without your consent.</p>
                     <div
                         className={style.cta}
                     >
