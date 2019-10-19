@@ -3,6 +3,7 @@ import { Card, Media, Button } from 'react-bootstrap';
 
 import mildDepression from '../../assets/images/mild-depression.svg';
 import severeAnxiety from '../../assets/images/severe-anxiety.svg';
+import phychoLevel from '../../assets/images/phycho-level.svg';
 
 import styles from './index.module.scss';
 
@@ -22,12 +23,15 @@ const PhychoPage = () => {
                                 <h2>Mild Depression</h2>
                             </Media.Body>
                             <img
-                                src={mildDepression}
+                                src={mildDepression}phychoLevel
                                 width={39}
                                 height={48}
                                 alt="Mild Depression"
                             />
                         </Media>
+                        {/* <div className={styles.phychoLevel}>
+                            <img className={styles.phychoLevelBar} src={phychoLevel} alt="Phycho level" />
+                        </div> */}
                     </Card.Body>
                 </Card>
                 <Card className={styles.phycho}>
