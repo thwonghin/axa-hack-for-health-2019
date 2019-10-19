@@ -1,9 +1,12 @@
 .switchWrapper {
     position: relative;
-    margin-top: 67px;
+    margin-top: 68px;
 }
 
 .switchWrapper > div {
     position: absolute;
     width: 100%;
+    > div {
+        height: 100%;
+    }
 }
