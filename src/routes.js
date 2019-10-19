@@ -8,6 +8,8 @@ import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
 import IgRedirectPage from './pages/IgRedirectPage';
+import RewardPage from './pages/RewardPage';
+import PhychoPage from './pages/PhychoPage';
 
 function mapStyles(styles) {
     return {
@@ -41,6 +43,16 @@ const Routes = () => {
                 path="/ig-redirect"
             >
                 <IgRedirectPage />
+            </Route>
+            <Route
+                path="/reward"
+            >
+                <RewardPage />
+            </Route>
+            <Route
+                path="/phycho"
+            >
+                <PhychoPage />
             </Route>
             <Route
                 path="/"
