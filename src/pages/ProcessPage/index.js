@@ -88,26 +88,34 @@ const ProcessPage = () => {
                 console.dir(results);
                 const sentiment = new Sentiment();
                 const colorThief = new ColorThief();
-                const colorScores = await Promise.all(results.map(r => getImageSentiment(r.media_url, colorThief)));
-
-                const totalImageSentiment = colorScores.reduce((acc, curr) => acc + curr, 0);
+                const palettes = await Promise.all(results.map(r => getImagePalette(r.media_url, colorThief)));
+                const totalImageSentiment = palettes.reduce((acc, curr) => acc + getPaletteScore(curr), 0);
+                const totalAbsImageSentiment = palettes.reduce((acc, curr) => acc + Math.abs(getPaletteScore(curr)), 0);
                 const captionSentiments = results.map(r => sentiment.analyze(r.caption));
+                console.dir(captionSentiments);
                 const totalCaptionSentiment = captionSentiments.reduce((acc, curr) => {
                     return acc + curr.score;
                 }, 0);
+
+                const totalAbsCaptionSentiment = captionSentiments.reduce((acc, curr) => {
+                    return acc + Math.abs(curr.score);
+                }, 0); 
                 
-                return { imageSentimentScore: totalImageSentiment, captionSentimentScore: totalCaptionSentiment};
+                return { imageSentimentScore: totalImageSentiment/totalAbsImageSentiment, captionSentimentScore: totalCaptionSentiment/totalAbsCaptionSentiment};
             }
 
-            async function getImageSentiment(url, colorThief) {
+            function getPaletteScore(palette) {
+                return  palette[0] > palette[2] ? 1: -1 // R > B 
+            }
+
+            async function getImagePalette(url, colorThief) {
                 let isResolved = false;
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     img.addEventListener('load', function() {
                         const palette = colorThief.getPalette(img);
-                        const colorScore = palette.reduce((acc, curr) => acc + (curr[0] > curr[2] ? 1: -1), 0);
                         isResolved = true
-                        resolve(colorScore);
+                        resolve(palette);
                     });
                     setTimeout(() => {
                         if (!isResolved) {
