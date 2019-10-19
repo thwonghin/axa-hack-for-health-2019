@@ -17,6 +17,8 @@ export default function IgRedirect() {
                 return;
             }
 
+            window.history.pushState({}, null, '/');
+
             async function run() {
                 try {
                     const form = new FormData();
