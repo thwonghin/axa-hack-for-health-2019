@@ -1,0 +1,15 @@
+.img {
+    width: 145px;
+    height: 159px;
+    object-fit: cover;
+}
+
+.contentContainer {
+    overflow-x: auto;
+    min-width: 100%;
+    padding: 15px;
+    display: flex;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
