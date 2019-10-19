@@ -109,7 +109,7 @@ const PhychoPage = () => {
             </Card>
 
             <div className={styles.cta}>
-                <Button className={styles.ctaButton}>CTA talk to chat bot?</Button>
+                <Button className={styles.ctaButton}>Lets Chat!</Button>
             </div>
         </div>
     );
