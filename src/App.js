@@ -5,7 +5,7 @@ import MainNavbar from './components/MainNavbar';
 import Routes from './routes';
 
 const App = () => (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <MainNavbar />
         <Routes />
     </BrowserRouter>

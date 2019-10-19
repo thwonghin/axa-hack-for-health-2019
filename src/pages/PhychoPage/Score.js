@@ -37,7 +37,7 @@ const Score = ({ score }) => {
                         fontSize: '50px',
                     }}
                 >
-                    {score}
+                    {Math.round(score)}
                 </span>
                 <span
                     style={{
