@@ -8,6 +8,8 @@ import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
 import IgRedirectPage from './pages/IgRedirectPage';
+import BookingDoctorPage from './pages/BookingDoctorPage';
+import BookingConfirmedPage from './pages/BookingConfirmedPage';
 import RewardPage from './pages/RewardPage';
 import PhychoPage from './pages/PhychoPage';
 
@@ -34,6 +36,16 @@ const Routes = () => {
             className={style.switchWrapper}
             mapStyles={mapStyles}
         >
+            <Route
+                path="/booking-confirmed"
+            >
+                <BookingConfirmedPage />
+            </Route>
+            <Route
+                path="/booking"
+            >
+                <BookingDoctorPage />
+            </Route>
             <Route
                 path="/process"
             >
