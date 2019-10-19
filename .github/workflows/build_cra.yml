@@ -17,5 +17,6 @@ jobs:
       run: |
         yarn
         yarn build
+        mv build docs
       env:
-        CI: true
+        CI: false
