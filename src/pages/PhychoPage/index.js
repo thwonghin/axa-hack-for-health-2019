@@ -1,15 +1,23 @@
 import React from 'react';
 import { Card, Media, Button } from 'react-bootstrap';
-
-import mildDepression from '../../assets/images/mild-depression.svg';
-import severeAnxiety from '../../assets/images/severe-anxiety.svg';
-import phychoLevel from '../../assets/images/phycho-level.svg';
+import { useLocation } from 'react-router-dom';
 
 import styles from './index.module.scss';
 
 import Score from './Score';
 
 const PhychoPage = () => {
+    const location = useLocation();
+
+    console.log(location);
+
+    const queryParams = new URLSearchParams(location.search);
+
+    const captionSentimentScore = queryParams.get('captionSentimentScore');
+    const imageSentimentScore = queryParams.get('imageSentimentScore');
+
+    console.log(captionSentimentScore, imageSentimentScore);
+
     return (
         <div>
             <p className={styles.intro}>Based on our analysis, here are our insights</p>
@@ -76,13 +84,25 @@ const PhychoPage = () => {
                 <Card.Body>
                     <Media>
                         <Media.Body>
-                            <h2>Image score</h2>
-                            <div className={styles.phychoIntro}>Results are based on your photos</div>
-                            <Score score={48} />
-                            <br />
-                            <h2>Caption score</h2>
-                            <div className={styles.phychoIntro}>Results are based on your captions</div>
-                            <Score score={48} />
+                            {
+                                imageSentimentScore && (
+                                    <>
+                                        <h2>Image score</h2>
+                                        <div className={styles.phychoIntro}>Results are based on your photos</div>
+                                        <Score score={imageSentimentScore * -100} />
+                                        <br />
+                                    </>
+                                )
+                            }
+                            {
+                                captionSentimentScore && (
+                                    <>
+                                        <h2>Caption score</h2>
+                                        <div className={styles.phychoIntro}>Results are based on your captions</div>
+                                        <Score score={captionSentimentScore * -100} />
+                                    </>
+                                )
+                            }
                         </Media.Body>
                     </Media>
                 </Card.Body>
