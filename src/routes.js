@@ -7,6 +7,7 @@ import { AnimatedSwitch, spring } from 'react-router-transition';
 import style from './routes.module.scss';
 import HomePage from './pages/HomePage';
 import ProcessPage from './pages/ProcessPage';
+import MlTestPage from './pages/MlTestPage';
 import IgRedirectPage from './pages/IgRedirectPage';
 import BookingDoctorPage from './pages/BookingDoctorPage';
 import BookingConfirmedPage from './pages/BookingConfirmedPage';
@@ -52,6 +53,11 @@ const Routes = () => {
                 <ProcessPage />
             </Route>
             <Route
+                path="/ml-test"
+            >
+                <MlTestPage />
+            </Route>
+            <Route
                 path="/ig-redirect"
             >
                 <IgRedirectPage />
@@ -69,7 +75,7 @@ const Routes = () => {
             <Route
                 path="/"
             >
-                <HomePage />
+                <HomePage/>
             </Route>
         </AnimatedSwitch>
     );
