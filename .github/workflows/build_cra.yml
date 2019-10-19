@@ -18,4 +18,4 @@ jobs:
         yarn
         yarn build
       env:
-        CI: true
+        CI: false
