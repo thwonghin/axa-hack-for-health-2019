@@ -12,6 +12,7 @@ import IgRedirectPage from './pages/IgRedirectPage';
 function mapStyles(styles) {
     return {
         transform: `translateX(${styles.offset}%)`,
+        height: 'calc(100vh - 68px)',
     };
 }
 
