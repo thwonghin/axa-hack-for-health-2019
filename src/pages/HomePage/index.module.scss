@@ -1,9 +1,15 @@
 .home {
+    background-color: #3f51b5;
+}
 
+.homeBg {
+    position: absolute;
+    top: 63px;
+    right: 0;
 }
 
 .content {
-    background-color: #3f51b5;
+    position: relative;
     padding: 52px 33px 30px 33px;
     color: white;
 }
@@ -11,7 +17,7 @@
 .heading {
     max-width: 212px;
     font-size: 30px;
-    margin-bottom: 17px;
+    margin-bottom: 115px;
     font-weight: 900;
     letter-spacing: 1.25px;
 }
@@ -24,7 +30,7 @@
 }
 
 .cta {
-    margin-top: 64px;
+    margin-top: 44px;
 }
 
 .moreArrow {
