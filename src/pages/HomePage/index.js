@@ -21,7 +21,7 @@ const Home = () => {
         () => {
             const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
             if ('booking' in query) {
-                window.history.pushState({}, null, '/');
+                window.history.pushState({}, null, `${window.location.origin}${window.location.pathname}`);
                 toBooking();
             }
         },
