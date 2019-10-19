@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
-
-import { usePushHistory } from 'libs/hooks';
-import { store } from '../../store';
 import axios from 'axios';
 import { isSameDay, differenceInMonths } from 'date-fns';
+
+import loading from 'assets/loading.svg';
+import { usePushHistory } from 'libs/hooks';
+import { store } from '../../store';
+import style from './index.module.scss';
 
 const ProcessPage = () => {
     const onClickCancel = usePushHistory('/');
@@ -22,7 +24,7 @@ const ProcessPage = () => {
                     }
                     lastMediaDate = currentMediaDate;
 
-                    const hashTags = rawMedia.caption.match(/\B#\S\S+/gm) || [];
+                    const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,
                         hash_tags: hashTags,
@@ -66,11 +68,20 @@ const ProcessPage = () => {
     );
 
     return (
-        <div>
+        <div className={style.process}>
             {/* {medias.length} */}
-            <Nav.Link onClick={onClickCancel}>
-                Cancel
-            </Nav.Link>
+            <div style={{ width: '250px', textAlign: 'center', marginTop: '56px', flex: 1 }}>
+                <h1>Analyzing data…</h1>
+                <p className={style.desc}>Gathering Body check plans tailored exclusively for you!</p>
+                <img src={loading} alt="loading" />
+            </div>
+            <div className={style.tip}>
+                <img src="https://axahk.cdn.axa-contento-118412.eu/axahk/2c8e56395bb750eaf79253df10e44d77e477e4a9_asian-woman-taking-photo_resize.jpg" className={style.imagePlaceholder} alt="travel" />
+                <div className={style.text}>
+                    <h2 className={style.title}>Set a time limit for work on a trip</h2>
+                    <p className={style.desc}>The purpose of travelling is to do something different from our daily routine. For better de-stress results, remember to be fully committed to your trip and try not to bring your work along.</p>
+                </div>
+            </div>
         </div>
     );
 };

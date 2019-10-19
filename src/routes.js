@@ -10,6 +10,8 @@ import ProcessPage from './pages/ProcessPage';
 import IgRedirectPage from './pages/IgRedirectPage';
 import BookingDoctorPage from './pages/BookingDoctorPage';
 import BookingConfirmedPage from './pages/BookingConfirmedPage';
+import RewardPage from './pages/RewardPage';
+import PhychoPage from './pages/PhychoPage';
 
 function mapStyles(styles) {
     return {
@@ -53,6 +55,16 @@ const Routes = () => {
                 path="/ig-redirect"
             >
                 <IgRedirectPage />
+            </Route>
+            <Route
+                path="/reward"
+            >
+                <RewardPage />
+            </Route>
+            <Route
+                path="/phycho"
+            >
+                <PhychoPage />
             </Route>
             <Route
                 path="/"
