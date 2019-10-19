@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
-
-import { usePushHistory } from 'libs/hooks';
-import { store } from '../../store';
 import axios from 'axios';
 import { isSameDay, differenceInMonths } from 'date-fns';
+
+import loading from 'assets/loading.svg';
+import { usePushHistory } from 'libs/hooks';
+import { store } from '../../store';
+import style from './index.module.scss';
 
 const ProcessPage = () => {
     const onClickCancel = usePushHistory('/');
@@ -22,7 +24,7 @@ const ProcessPage = () => {
                     }
                     lastMediaDate = currentMediaDate;
 
-                    const hashTags = rawMedia.caption.match(/\B#\S\S+/gm) || [];
+                    const hashTags = (rawMedia.caption || '').match(/\B#\S\S+/gm) || [];
                     results.push({
                         ...rawMedia,
                         hash_tags: hashTags,
@@ -66,11 +68,20 @@ const ProcessPage = () => {
     );
 
     return (
-        <div>
+        <div className={style.process}>
             {/* {medias.length} */}
-            <Nav.Link onClick={onClickCancel}>
-                Cancel
-            </Nav.Link>
+            <div style={{ width: '250px', textAlign: 'center', marginTop: '56px', flex: 1 }}>
+                <h1>Analyzing data…</h1>
+                <p className={style.desc}>Gathering Body check plans tailored exclusively for you!</p>
+                <img src={loading} alt="loading" />
+            </div>
+            <div className={style.tip}>
+                <div className={style.imagePlaceholder}></div>
+                <div className={style.text}>
+                    <h2 className={style.title}>Health Tip #1039</h2>
+                    <p className={style.desc}>Lôrem ipsum dolor sït àmet, vivëndùm àdversarium Lôrem ipsum dolor sït àmet, vivëndùm àdversarium</p>
+                </div>
+            </div>
         </div>
     );
 };
