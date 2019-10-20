@@ -84,11 +84,12 @@ const PhychoPage = () => {
                 <Card.Body>
                     <Media>
                         <Media.Body>
+                            <h2 style={{ color: '#4a4a4a' }}>Insights</h2>
+                            <p style={{ color: '#9b9b9b', marginBottom: '20px' }}>Results are based on social profile</p>
                             {
                                 (imageSentimentScore) && (
                                     <>
-                                        <h2>Image score</h2>
-                                        <div className={styles.phychoIntro}>Results are based on your photos</div>
+                                        <h2 style={{ color: '#9b9b9b', fontSize: '14px', }}>Image Rating</h2>
                                         <Score score={imageSentimentScore} />
                                         <br />
                                     </>
@@ -97,8 +98,7 @@ const PhychoPage = () => {
                             {
                                 (captionSentimentScore) && (
                                     <>
-                                        <h2>Caption score</h2>
-                                        <div className={styles.phychoIntro}>Results are based on your captions</div>
+                                        <h2 style={{ color: '#9b9b9b', fontSize: '14px', }}>Caption Rating</h2>
                                         <Score score={captionSentimentScore} />
                                     </>
                                 )
