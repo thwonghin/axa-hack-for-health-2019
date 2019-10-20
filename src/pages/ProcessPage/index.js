@@ -94,7 +94,7 @@ const ProcessPage = () => {
                         return;
                     }
                     if (!Number.isNaN(result.captionSentimentScore) && !Number.isNaN(result.imageSentimentScore)) {
-                        if (result.imageSentimentScore < 0 && result.captionSentimentScore < 0) {
+                        if (result.imageSentimentScore < 0 || result.captionSentimentScore < 0) {
                             history.push(`/phycho?imageSentimentScore=${result.imageSentimentScore}&captionSentimentScore=${result.captionSentimentScore}`);
                         } else {
                             history.push('/reward');
