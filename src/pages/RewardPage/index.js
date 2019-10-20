@@ -69,9 +69,26 @@ const RewardPage = () => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         color: 'white',
+                        flexDirection: 'column',
                     }}
                 >
-                    YOU ARE FINE
+                    <p style={{
+                        fontWeight: 'bold',
+                        letterSpacing: '2px',
+                        fontSize: '20px',
+                        textAlign: 'center',
+                    }}>
+                        YOU ARE DOING GREAT
+                    </p>
+                    <p style={{
+                        letterSpacing: '0.3px',
+                        fontSize: '13px',
+                        marginBottom: 0,
+                        textAlign: 'center',
+                    }}>
+                        You are on the right track!<br/>
+                        Keep maintaining your healthy lifestyle
+                    </p>
                 </div>
             </div>
             <Button
