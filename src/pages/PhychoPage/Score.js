@@ -2,7 +2,8 @@ import React from 'react';
 import ProgressArc from 'react-progress-arc';
 
 const Score = ({ score }) => {
-    const percentage = (score / 100);
+    console.log(score);
+    const percentage = Math.abs(score * 100);
     return (
         <div
             style={{
@@ -13,7 +14,7 @@ const Score = ({ score }) => {
         >
             <ProgressArc
                 completed={percentage}
-                stroke={'#f70101'}
+                stroke={score > 0 ? '#95E5A1' : '#FFA4A4'}
                 diameter={150}
                 strokeWidth={10}
             />
@@ -37,7 +38,7 @@ const Score = ({ score }) => {
                         fontSize: '50px',
                     }}
                 >
-                    {Math.round(score)}
+                    {Math.abs(Math.round(score * 100))}
                 </span>
                 <span
                     style={{

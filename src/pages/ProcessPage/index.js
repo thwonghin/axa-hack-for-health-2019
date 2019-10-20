@@ -107,7 +107,8 @@ const ProcessPage = () => {
                         return;
                     }
                 } catch (err) {
-                    restart();
+                    // restart();
+                    console.log(err);
                 }
             }
 
@@ -131,11 +132,27 @@ const ProcessPage = () => {
                 };
                 const sentiment = new Sentiment();
                 const colorThief = new ColorThief();
-                const palettes = await Promise.all(results.map(r => getImagePalette(r.media_url, colorThief)));
-                const totalImageSentiment = palettes.reduce((acc, curr) => acc + getPaletteScore(curr), 0);
-                const totalAbsImageSentiment = palettes.reduce((acc, curr) => acc + Math.abs(getPaletteScore(curr)), 0);
+                const imagesPalette = await Promise.all(results.map(r => getImagePalette(r.media_url, colorThief)));
+                const { totalImageSentiment, totalAbsImageSentiment } = imagesPalette.map((palettes) => {
+                    const a = palettes.reduce((acc, curr) => acc + getPaletteScore(curr), 0);
+                    const b = palettes.reduce((acc, curr) => acc + Math.abs(getPaletteScore(curr)), 0);
+
+                    return {
+                        totalImageSentiment: a,
+                        totalAbsImageSentiment: b,
+                    };
+                })
+                    .reduce((acc, cur) => {
+                        return {
+                            totalImageSentiment: cur.totalImageSentiment + acc.totalImageSentiment,
+                            totalAbsImageSentiment: cur.totalAbsImageSentiment + acc.totalAbsImageSentiment,
+                        };
+                    }, { totalImageSentiment: 0,totalAbsImageSentiment : 0 });
+
+                console.log('abc', totalImageSentiment, totalAbsImageSentiment);
+
                 const captionSentiments = results.map(r => sentiment.analyze(r.caption, options));
-                console.dir(captionSentiments);
+                console.dir('cap', captionSentiments);
                 const totalCaptionSentiment = captionSentiments.reduce((acc, curr) => {
                     return acc + curr.score;
                 }, 0);
@@ -148,6 +165,7 @@ const ProcessPage = () => {
             }
 
             function getPaletteScore(palette) {
+                console.log('pal', palette);
                 return  palette[0] > palette[2] ? 1: -1 // R > B
             }
 

@@ -85,21 +85,21 @@ const PhychoPage = () => {
                     <Media>
                         <Media.Body>
                             {
-                                (imageSentimentScore && imageSentimentScore < 0) && (
+                                (imageSentimentScore) && (
                                     <>
                                         <h2>Image score</h2>
                                         <div className={styles.phychoIntro}>Results are based on your photos</div>
-                                        <Score score={imageSentimentScore * -100} />
+                                        <Score score={imageSentimentScore} />
                                         <br />
                                     </>
                                 )
                             }
                             {
-                                (captionSentimentScore && captionSentimentScore< 0) && (
+                                (captionSentimentScore) && (
                                     <>
                                         <h2>Caption score</h2>
                                         <div className={styles.phychoIntro}>Results are based on your captions</div>
-                                        <Score score={captionSentimentScore * -100} />
+                                        <Score score={captionSentimentScore} />
                                     </>
                                 )
                             }
