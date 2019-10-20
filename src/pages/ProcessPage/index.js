@@ -203,8 +203,8 @@ const ProcessPage = () => {
         <div className={style.process}>
             {/* {medias.length} */}
             <div style={{ width: '250px', textAlign: 'center', marginTop: '56px', flex: 1 }}>
-                <h1>Analyzing data…</h1>
-                <p className={style.desc}>Gathering Body check plans tailored exclusively for you!</p>
+                <h1 style={{ fontWeight: 'bold' }}>Computing Score…</h1>
+                <p className={style.desc}>Analyzing all your data<br/>(photographs, Text, Captions and hashtags).</p>
                 <img src={loading} alt="loading" />
             </div>
             <div className={style.tip}>
