@@ -77,8 +77,11 @@ const ProcessPage = () => {
 
                     await assignMediasFromApiData(data, results, parseISO(data.data[0].timestamp));
                     setMedias(results);
-
-                    const result = await analyze(results);
+                    const timeout = new Promise((rs) => setTimeout(rs, 5000));
+                    const [result] = await Promise.all([
+                        analyze(results),
+                        timeout,
+                    ]);
                     if (Number.isNaN(result.captionSentimentScore) && Number.isNaN(result.imageSentimentScore)) {
                         history.push('/reward');
                         return;
