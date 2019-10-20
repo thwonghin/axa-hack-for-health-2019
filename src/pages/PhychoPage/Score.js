@@ -23,6 +23,9 @@ const Score = ({ score }) => {
             </div>
             <img
                 src={rating}
+                style={{
+                    width: '100%',
+                }}
             />
             <div
                 style={{
@@ -38,7 +41,7 @@ const Score = ({ score }) => {
                 <img
                     src={arrow}
                     style={{
-                        transform: `translate(${-score * 305}px, 35px)`,
+                        transform: `translate(${-score * ((window.innerWidth - 70) / 2)}px, 35px)`,
                     }}
                 />
             </div>
