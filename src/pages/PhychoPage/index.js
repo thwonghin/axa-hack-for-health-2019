@@ -89,8 +89,7 @@ const PhychoPage = () => {
                             {
                                 (imageSentimentScore) && (
                                     <>
-                                        <h2 style={{ color: '#9b9b9b', fontSize: '14px', }}>Image Rating</h2>
-                                        <Score score={imageSentimentScore} />
+                                        <Score score={imageSentimentScore} text={'Image Rating '} />
                                         <br />
                                     </>
                                 )
@@ -98,8 +97,7 @@ const PhychoPage = () => {
                             {
                                 (captionSentimentScore) && (
                                     <>
-                                        <h2 style={{ color: '#9b9b9b', fontSize: '14px', }}>Caption Rating</h2>
-                                        <Score score={captionSentimentScore} />
+                                        <Score score={captionSentimentScore} text={'Caption Rating '} />
                                     </>
                                 )
                             }
@@ -109,7 +107,7 @@ const PhychoPage = () => {
             </Card>
 
             <div className={styles.cta}>
-                <Button className={styles.ctaButton}>Lets Chat!</Button>
+                <Button className={styles.ctaButton}>Learn more about this score</Button>
             </div>
         </div>
     );
