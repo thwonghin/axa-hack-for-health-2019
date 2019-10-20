@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
+import qs from 'qs';
 import homeBg from '../../assets/images/home-bg.svg';
 import style from './index.module.scss';
 
@@ -11,8 +12,22 @@ import orangeArrow from '../../assets/images/orange-arrow.svg'
 import IgConnectButton from '../../components/IgConnectButton';
 
 import IgRedirect from '../../components/IgRedirect';
+import { usePushHistory } from '../../libs/hooks';
 
 const Home = () => {
+    const toBooking = usePushHistory('/booking');
+
+    useEffect(
+        () => {
+            const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+            if ('booking' in query) {
+                window.history.pushState({}, null, `${window.location.origin}${window.location.pathname}`);
+                toBooking();
+            }
+        },
+        [toBooking],
+    )
+
     return (
         <div className={style.home}>
             <IgRedirect />
