@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/axa-hack-for-health-2019/static/css/main.6938f4ef.chunk.css",
+    "main.js": "/axa-hack-for-health-2019/static/js/main.4b522b85.chunk.js",
+    "main.js.map": "/axa-hack-for-health-2019/static/js/main.4b522b85.chunk.js.map",
+    "runtime-main.js": "/axa-hack-for-health-2019/static/js/runtime-main.8ce2f62e.js",
+    "runtime-main.js.map": "/axa-hack-for-health-2019/static/js/runtime-main.8ce2f62e.js.map",
+    "static/css/2.0624914a.chunk.css": "/axa-hack-for-health-2019/static/css/2.0624914a.chunk.css",
+    "static/js/2.c7a048d5.chunk.js": "/axa-hack-for-health-2019/static/js/2.c7a048d5.chunk.js",
+    "static/js/2.c7a048d5.chunk.js.map": "/axa-hack-for-health-2019/static/js/2.c7a048d5.chunk.js.map",
+    "index.html": "/axa-hack-for-health-2019/index.html",
+    "precache-manifest.142bf9048893538e681a187a03307274.js": "/axa-hack-for-health-2019/precache-manifest.142bf9048893538e681a187a03307274.js",
+    "service-worker.js": "/axa-hack-for-health-2019/service-worker.js",
+    "static/css/2.0624914a.chunk.css.map": "/axa-hack-for-health-2019/static/css/2.0624914a.chunk.css.map",
+    "static/css/main.6938f4ef.chunk.css.map": "/axa-hack-for-health-2019/static/css/main.6938f4ef.chunk.css.map",
+    "static/media/index.css": "/axa-hack-for-health-2019/static/media/Avenir-Regular.b5ed9330.otf",
+    "static/media/arrow-left.svg": "/axa-hack-for-health-2019/static/media/arrow-left.c7125725.svg",
+    "static/media/arrow.svg": "/axa-hack-for-health-2019/static/media/arrow.17184094.svg",
+    "static/media/dr-phil-cheng-wong-chan.jpg": "/axa-hack-for-health-2019/static/media/dr-phil-cheng-wong-chan.105c8ec6.jpg",
+    "static/media/drink-coffee-with-laptop-in-cafe.png": "/axa-hack-for-health-2019/static/media/drink-coffee-with-laptop-in-cafe.0181519b.png",
+    "static/media/facebook.svg": "/axa-hack-for-health-2019/static/media/facebook.7bab9e0a.svg",
+    "static/media/home-bg.svg": "/axa-hack-for-health-2019/static/media/home-bg.83acd907.svg",
+    "static/media/instagram.svg": "/axa-hack-for-health-2019/static/media/instagram.c2cd8e93.svg",
+    "static/media/loading.svg": "/axa-hack-for-health-2019/static/media/loading.7e4f43e1.svg",
+    "static/media/orange-arrow.svg": "/axa-hack-for-health-2019/static/media/orange-arrow.64e3cff4.svg",
+    "static/media/rating.svg": "/axa-hack-for-health-2019/static/media/rating.3fce8fcc.svg",
+    "static/media/reward-m-bg.jpg": "/axa-hack-for-health-2019/static/media/reward-m-bg.755f8b86.jpg",
+    "static/media/starbucks-cup.svg": "/axa-hack-for-health-2019/static/media/starbucks-cup.a51ab4ee.svg",
+    "static/media/starbucks.svg": "/axa-hack-for-health-2019/static/media/starbucks.803af363.svg",
+    "static/media/times.svg": "/axa-hack-for-health-2019/static/media/times.76061fdc.svg",
+    "static/media/twitter.svg": "/axa-hack-for-health-2019/static/media/twitter.cec42508.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8ce2f62e.js",
+    "static/css/2.0624914a.chunk.css",
+    "static/js/2.c7a048d5.chunk.js",
+    "static/css/main.6938f4ef.chunk.css",
+    "static/js/main.4b522b85.chunk.js"
+  ]
+}
