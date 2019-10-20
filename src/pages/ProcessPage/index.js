@@ -116,12 +116,26 @@ const ProcessPage = () => {
                 console.log('------ analyze ------');
 
                 console.dir(results);
+                const options = {
+                    extras: {
+                        'axa': 1,
+                        'worry': -1, 
+                        'stressed': -1,
+                        'bad': -1,
+                        'busy': -1,
+                        'afraid': -1,
+                        'negative': -1,
+                        'thinking': -1,
+                        'intense': -1,
+                        'nervous': -1,
+                    }
+                }
                 const sentiment = new Sentiment();
                 const colorThief = new ColorThief();
                 const palettes = await Promise.all(results.map(r => getImagePalette(r.media_url, colorThief)));
                 const totalImageSentiment = palettes.reduce((acc, curr) => acc + getPaletteScore(curr), 0);
                 const totalAbsImageSentiment = palettes.reduce((acc, curr) => acc + Math.abs(getPaletteScore(curr)), 0);
-                const captionSentiments = results.map(r => sentiment.analyze(r.caption));
+                const captionSentiments = results.map(r => sentiment.analyze(r.caption, options));
                 console.dir(captionSentiments);
                 const totalCaptionSentiment = captionSentiments.reduce((acc, curr) => {
                     return acc + curr.score;
