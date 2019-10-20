@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import style from './index.module.scss';
 import starbucksCup from 'assets/images/starbucks-cup.svg';
 import starbucks from 'assets/images/starbucks.svg';
+import rewardMBg from '../../assets/images/reward-m-bg.jpg';
 
 const images = [
     {
@@ -29,7 +30,7 @@ const RewardPage = () => {
             }}
         >
             <p
-                style={{ padding: '15px', width: '100%', margin: 0 }}
+                style={{ padding: '15px', width: '100%', margin: 0, color: '#9b9b9b',  fontSize: '14px', letterSpacing: '0.3px' }}
             >
                 Based on our analysis, here are our insights
             </p>
@@ -95,17 +96,17 @@ const RewardPage = () => {
                 style={{
                     'boxShadow': '0 -3px 10px 0 rgba(128, 128, 128, 0.15)',
                     borderRadius: '10px',
-                    padding: '25px',
+                    padding: '33px 25px 16px 29px',
                     width: 'calc(100% - 30px)',
                     margin: '15px',
                     fontSize: '18px',
                     color: '#65676a',
                     fontWeight: 'bold',
-                    backgroundColor: 'white',
-                    borderColor: 'white',
-                    backgroundColor: '#1c6f4e',
+                    border: 0,
                     display: 'flex',
                     justifyContent: 'space-between',
+                    backgroundImage: `url(${rewardMBg})`,
+                    backgroundSize: 'cover',
                 }}
             >
                 <div
@@ -119,20 +120,42 @@ const RewardPage = () => {
                     }}
                 >
                     <div>
-                        <p style={{ fontSize: '22px', color: 'white', fontWeight: 'bold', margin: 0 }}>
-                            Claim your reward
-                        </p>
-                        <p style={{ fontSize: '22px', color: 'white', fontWeight: 500, margin: 0 }}>
-                            5000 gold stars
-                        </p>
+                        <div
+                            style={{
+                                fontSize: '12px',
+                                letterSpacing: '0.26px',
+                                color: '#3f51b5',
+                            }}
+                        >
+                            Stay in touch with us for
+                        </div>
+                        <div
+                            style={{
+                                fontSize: '30px',
+                                letterSpacing: '0.26px',
+                                color: '#3f51b5',
+                            }}
+                        >
+                            Future Events
+                        </div>
+                        <Button
+                            style={{
+                                marginTop: '29px',
+                                border: 0,
+                                borderRadius: '5px',
+                                boxShadow: '0 -3px 10px 0 rgba(128, 128, 128, 0.15)',
+                                backgroundColor: '#002395',
+                                padding: '14px 20px',
+                                letterSpacing: '0.3px',
+                                fontSize: '14px',
+                                fontWeight: 'bold',
+                                lineHeight: 1,
+                            }}
+                        >
+                            Subscribe Now!
+                        </Button>
                     </div>
-                    <img
-                        src={starbucks}
-                    />
                 </div>
-                <img
-                    src={starbucksCup}
-                />
             </Button>
             <div
                 className={style.contentContainer}
@@ -157,16 +180,6 @@ const RewardPage = () => {
                                     variant="top"
                                     src={img.src}
                                     className={style.img}
-                                />
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: 0,
-                                        right: 0,
-                                        left: 0,
-                                        bottom: 0,
-                                        backgroundColor: 'rgba(0,35,149, 0.5)'
-                                    }}
                                 />
                             </div>
                             <Card.Body
