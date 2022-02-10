@@ -9,7 +9,7 @@
     "colorthief": "^2.3.0",
     "date-fns": "^2.5.0",
     "node-nlp": "^3.10.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "qs": "^6.9.0",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
