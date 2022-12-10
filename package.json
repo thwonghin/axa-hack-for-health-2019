@@ -10,7 +10,7 @@
     "date-fns": "^2.5.0",
     "node-nlp": "^3.10.0",
     "node-sass": "^4.12.0",
-    "qs": "^6.9.0",
+    "qs": "^6.7.3",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.2",
